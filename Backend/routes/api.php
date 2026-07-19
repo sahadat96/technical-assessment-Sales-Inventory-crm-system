@@ -30,15 +30,22 @@ Route::prefix('sales')->group(function () {
     });
 });
 
-// Sales
+// Customer-Management
 Route::prefix('customer-management')->group(function () {
 
     Route::middleware('jwt.auth')->group(function () {
+        
         Route::get(
             '/customers/{customer}/purchase-history',
             [CustomerManagementController::class, 'purchaseHistory']
         );
 
-        Route::get('/customers/lost', [CustomerManagementController::class, 'lostCustomers']);
+        Route::get('/customers/lost', 
+            [CustomerManagementController::class, 'lostCustomers']);
+
+        Route::post(
+            '/customer-campaigns/send',
+            [CustomerManagementController::class,'send']
+        );
     });
 });

@@ -7,6 +7,8 @@ use App\Services\CustomerService;
 use Illuminate\Http\JsonResponse;
 use App\Http\Resources\CustomerPurchaseHistoryResource;
 use App\Http\Resources\LostCustomerResource;
+use App\Http\Resources\CustomerCampaignResource;
+use App\Http\Requests\StoreCustomerCampaignRequest;
 
 class CustomerManagementController extends Controller
 {
@@ -37,6 +39,19 @@ class CustomerManagementController extends Controller
             'success' => true,
             'message' => 'Lost customers retrieved successfully.',
             'data' => LostCustomerResource::collection($customers),
+        ]);
+    }
+
+    public function send(StoreCustomerCampaignRequest $request)
+    {
+        $campaign = $this->customerService->send(
+            $request->validated()
+        );
+
+        return response()->json([
+            'success'=>true,
+            'message'=>'Promotion sent successfully.',
+            'data'=>new CustomerCampaignResource($campaign)
         ]);
     }
 }

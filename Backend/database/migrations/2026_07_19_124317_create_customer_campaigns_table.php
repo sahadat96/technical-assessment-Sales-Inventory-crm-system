@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customer_assignments', function (Blueprint $table) {
+        Schema::create('customer_campaigns', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('customer_id')
@@ -22,23 +22,32 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->timestamp('assigned_at');
+            $table->enum('channel',[
+                'email',
+                'sms'
+            ]);
 
-            $table->enum('status', [
-                'assigned',
-                'completed',
-                'cancelled'
-            ])->default('assigned');
+            $table->string('subject')->nullable();
+
+            $table->text('message');
+
+            $table->enum('status',[
+                'pending',
+                'sent',
+                'failed'
+            ])->default('pending');
+
+            $table->timestamp('sent_at')->nullable();
 
             $table->timestamps();
-        });
-    }
+                });
+            }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('customer_assignments');
+        Schema::dropIfExists('customer_campaigns');
     }
 };
