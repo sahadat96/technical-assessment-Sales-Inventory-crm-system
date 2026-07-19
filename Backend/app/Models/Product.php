@@ -13,4 +13,14 @@ class Product extends Model
         'stock_quantity',
         'is_active',
     ];
+
+    public function saleItems(): HasMany
+    {
+        return $this->hasMany(SaleItem::class);
+    }
+
+    public function inventoryTransactions(): HasMany
+    {
+        return $this->hasMany(InventoryTransaction::class);
+    }
 }
