@@ -1,58 +1,378 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sales, Inventory & CRM Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel 13 RESTful API for managing Sales, Inventory, CRM, Employee KPI, and Multi-Branch operations.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Authentication
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- JWT Authentication
+- User Registration
+- User Login
+- Refresh Access Token
+- Protected APIs
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Product Management
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Product Create
+- Soft Delete
+- SKU Validation
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Customer Management
 
-## Agentic Development
+- Customer Purchase History
+- Purchase Frequency
+- Last Purchase Date
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
 
-```bash
-composer require laravel/boost --dev
+## Sales Management
 
-php artisan boost:install
+- Create Sales
+- Sale Items
+- Payment Method
+- Payment Status
+- Tax
+- Discount
+- Automatic Total Calculation
+
+---
+
+## Inventory Management
+
+- Branch-wise Inventory
+- Automatic Stock Deduction
+- Inventory Transaction History
+- Stock Validation
+- Prevent Overselling
+
+---
+
+## CRM
+
+### Lost Customer Detection
+
+Customers with no purchases within the configured inactivity period (90 days).
+
+### Customer Re-engagement
+
+- Email Campaign
+- SMS (Structure Ready)
+- Queue-based Email Sending
+
+### Customer Assignment
+
+- Assign Lost Customers to Employees
+- Assignment Status
+- Follow-up Tracking
+
+---
+
+## Employee KPI
+
+Automatically rewards employees when an assigned inactive customer returns and makes a purchase.
+
+---
+
+## Multi Branch Support
+
+- Branch Management
+- Branch-wise Inventory
+- Branch-wise Sales
+- Branch Inventory Tracking
+
+---
+
+## API Resources
+
+- Resource Classes
+- Request Validation
+- Service Layer Architecture
+- Clean JSON Responses
+
+---
+
+# Tech Stack
+
+- Laravel 13
+- PHP 8.4+
+- MySQL
+- JWT Authentication
+- Queue
+- Mail
+- REST API
+
+---
+
+# Project Architecture
+
+```
+Controller
+      │
+      ▼
+Request Validation
+      │
+      ▼
+Service Layer
+      │
+      ▼
+Models
+      │
+      ▼
+Database
+      │
+      ▼
+API Resource
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Business logic is implemented inside the Service layer.
 
-## Contributing
+Controllers remain thin.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+# Installation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Clone the repository
 
-## Security Vulnerabilities
+```bash
+git clone https://github.com/sahadat96/technical-assessment-Sales-Inventory-crm-system.git
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Go to project
 
-## License
+```bash
+cd technical-assessment-Sales-Inventory-crm-system.git
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Install dependencies
+
+```bash
+composer install
+```
+
+Copy environment
+
+```bash
+cp .env.example .env
+```
+
+Generate application key
+
+```bash
+php artisan key:generate
+```
+
+Generate JWT Secret
+
+```bash
+php artisan jwt:secret
+```
+
+---
+
+# Environment Configuration
+
+Configure your `.env`
+
+```env
+APP_NAME="Sales CRM"
+
+APP_ENV=local
+
+APP_DEBUG=true
+
+APP_URL=http://127.0.0.1:8000
+
+DB_CONNECTION=mysql
+
+DB_HOST=127.0.0.1
+
+DB_PORT=3306
+
+DB_DATABASE=sales_inventory
+
+DB_USERNAME=root
+
+DB_PASSWORD=
+
+QUEUE_CONNECTION=database
+
+MAIL_MAILER=smtp
+
+MAIL_HOST=smtp.gmail.com
+
+MAIL_PORT=587
+
+MAIL_USERNAME=email@gmail.com
+
+MAIL_PASSWORD=app-password
+
+MAIL_ENCRYPTION=tls
+
+MAIL_FROM_ADDRESS=email@gmail.com
+
+MAIL_FROM_NAME="Sales CRM"
+```
+
+---
+
+# Database
+
+Create database
+
+```
+sales_inventory
+```
+
+Run migrations
+
+```bash
+php artisan migrate
+```
+
+---
+
+# Seed Database
+
+Run all seeders
+
+```bash
+php artisan db:seed
+```
+
+---
+
+# Queue
+
+Start Queue Worker
+
+```bash
+php artisan queue:work
+```
+
+---
+
+# Run Project
+
+```bash
+php artisan serve
+```
+
+API
+
+```
+http://127.0.0.1:8000
+```
+
+# Business Rules
+
+## Sales
+
+- Product must be active.
+- Branch inventory must exist.
+- Stock cannot be negative.
+- Sale and Inventory are transactional.
+- Automatic stock deduction.
+- Automatic inventory transaction creation.
+
+---
+
+## CRM
+
+- Detect lost customers.
+- Assign lost customers to employees.
+- Send promotional emails.
+- Track communication history.
+
+---
+
+## Employee KPI
+
+When an assigned inactive customer makes a purchase:
+
+- Create KPI record
+- Award employee points
+- Mark assignment as completed
+
+---
+
+# Sample Seed Data
+
+Seeders generate realistic:
+
+- Customers
+- Branches
+- Branch Inventory
+
+The project is immediately testable after running:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+---
+
+# Mail
+
+Email notifications use Laravel Mail.
+
+Supported:
+
+- SMTP
+- Gmail
+- Mailtrap
+
+Queue supported.
+
+---
+
+# Queue Jobs
+
+- SendPromotionJob
+
+---
+
+# Design Principles
+
+- SOLID Principles
+- Service Layer Pattern
+- Resource Classes
+- Form Requests
+- Database Transactions
+- Dependency Injection
+- Repository-ready Structure
+- Clean JSON Responses
+
+---
+
+# Evaluation Criteria Covered
+
+- Clean Architecture
+- Layered Design
+- RESTful API
+- Database Normalization
+- Business Logic
+- Inventory Control
+- CRM Module
+- Employee KPI
+- Multi-Branch Support
+- JWT Authentication
+- Queue Processing
+- Mail Integration
+- Laravel Best Practices
+
+---
+
+# Author
+
+Sahadat Hossain
+
+Backend Developer
+
+Laravel • PHP • MySQL
