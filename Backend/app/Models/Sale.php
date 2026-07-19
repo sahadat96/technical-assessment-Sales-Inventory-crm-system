@@ -43,4 +43,9 @@ class Sale extends Model
     {
         return $this->hasMany(InventoryTransaction::class);
     }
+
+    public function employeeKpis()
+    {
+        return $this->hasMany(EmployeeKpi::class);
+    }
 }

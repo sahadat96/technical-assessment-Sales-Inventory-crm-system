@@ -7,12 +7,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\SaleItem;
+use App\Services\EmployeeKpiService;
 use App\Models\InventoryTransaction;
 use Illuminate\Validation\ValidationException;
 
 class SaleService
 {
-     public function create(array $data): Sale
+
+    public function __construct(
+        private readonly EmployeeKpiService $employeeKpiService
+    ){}
+
+    public function create(array $data): Sale
     {
         return DB::transaction(function () use ($data) {
 
@@ -94,6 +100,8 @@ class SaleService
                 'total' => $total,
 
             ]);
+            
+            $this->employeeKpiService->reward($sale);
 
             return $sale->fresh();
         });

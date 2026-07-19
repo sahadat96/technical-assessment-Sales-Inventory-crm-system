@@ -23,4 +23,9 @@ class Customer extends Model
     {
         return $this->hasMany(CustomerAssignment::class);
     }
+
+    public function employeeKpis()
+    {
+        return $this->hasMany(EmployeeKpi::class);
+    }
 }

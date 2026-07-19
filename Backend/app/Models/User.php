@@ -41,4 +41,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function employeeKpis()
+    {
+        return $this->hasMany(EmployeeKpi::class);
+    }
 }
