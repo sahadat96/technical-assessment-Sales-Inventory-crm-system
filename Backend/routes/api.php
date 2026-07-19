@@ -38,5 +38,7 @@ Route::prefix('customer-management')->group(function () {
             '/customers/{customer}/purchase-history',
             [CustomerManagementController::class, 'purchaseHistory']
         );
+
+        Route::get('/customers/lost', [CustomerManagementController::class, 'lostCustomers']);
     });
 });

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\CustomerService;
 use Illuminate\Http\JsonResponse;
 use App\Http\Resources\CustomerPurchaseHistoryResource;
+use App\Http\Resources\LostCustomerResource;
 
 class CustomerManagementController extends Controller
 {
@@ -23,6 +24,19 @@ class CustomerManagementController extends Controller
             'success' => true,
             'message' => 'Purchase history retrieved successfully.',
             'data' => new CustomerPurchaseHistoryResource($customer),
+        ]);
+    }
+
+    public function lostCustomers(Request $request): JsonResponse
+    {
+        $days = (int) $request->input('days', 90);
+
+        $customers = $this->customerService->lostCustomers($days);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Lost customers retrieved successfully.',
+            'data' => LostCustomerResource::collection($customers),
         ]);
     }
 }
