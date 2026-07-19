@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\CustomerManagementController;
 
 // Auth
 Route::prefix('auth')->group(function () {
@@ -26,5 +27,16 @@ Route::prefix('sales')->group(function () {
 
     Route::middleware('jwt.auth')->group(function () {
         Route::post('/sales-store', [SaleController::class, 'store']);
+    });
+});
+
+// Sales
+Route::prefix('customer-management')->group(function () {
+
+    Route::middleware('jwt.auth')->group(function () {
+        Route::get(
+            '/customers/{customer}/purchase-history',
+            [CustomerManagementController::class, 'purchaseHistory']
+        );
     });
 });
