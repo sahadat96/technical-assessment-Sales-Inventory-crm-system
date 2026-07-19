@@ -73,5 +73,25 @@ class AuthController extends Controller
             'expires_in' => Auth::factory()->getTTL() * 60,
             'user' => Auth::user(),
         ]);
-    }   
+    }  
+    
+    public function refresh(): JsonResponse
+    {
+        try {
+            $token = Auth::refresh();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Token refreshed successfully.',
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+                'expires_in' => Auth::factory()->getTTL() * 60,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unable to refresh token.',
+            ], 401);
+        }
+    } 
 }
