@@ -47,5 +47,10 @@ Route::prefix('customer-management')->group(function () {
             '/customer-campaigns/send',
             [CustomerManagementController::class,'send']
         );
+
+        Route::post(
+            '/customer-assignments',
+            [CustomerManagementController::class,'customerAssignment']
+        );
     });
 });

@@ -8,7 +8,9 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Resources\CustomerPurchaseHistoryResource;
 use App\Http\Resources\LostCustomerResource;
 use App\Http\Resources\CustomerCampaignResource;
+use App\Http\Resources\CustomerAssignmentResource;
 use App\Http\Requests\StoreCustomerCampaignRequest;
+use App\Http\Requests\StoreCustomerAssignmentRequest;
 
 class CustomerManagementController extends Controller
 {
@@ -53,5 +55,24 @@ class CustomerManagementController extends Controller
             'message'=>'Promotion sent successfully.',
             'data'=>new CustomerCampaignResource($campaign)
         ]);
+    }
+
+    public function customerAssignment(
+        StoreCustomerAssignmentRequest $request
+    ): JsonResponse
+    {
+        $assignment = $this->customerService->customerAssignment(
+            $request->validated()
+        );
+
+        return response()->json([
+
+            'success'=>true,
+
+            'message'=>'Customer assigned successfully.',
+
+            'data'=>new CustomerAssignmentResource($assignment)
+
+        ],201);
     }
 }

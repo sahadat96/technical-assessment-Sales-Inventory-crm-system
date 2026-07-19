@@ -6,5 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerAssignment extends Model
 {
-    //
+
+    protected $fillable = [
+        'customer_id',
+        'user_id',
+        'assigned_at',
+    ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
