@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Sale extends Model
 {
@@ -18,6 +19,7 @@ class Sale extends Model
         'payment_method',
         'payment_status',
         'sold_at',
+        'branch_id',
     ];
 
     protected $casts = [
@@ -47,5 +49,10 @@ class Sale extends Model
     public function employeeKpis()
     {
         return $this->hasMany(EmployeeKpi::class);
+    }
+
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(Branches::class);
     }
 }

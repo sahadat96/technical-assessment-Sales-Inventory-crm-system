@@ -26,6 +26,12 @@ class StoreSaleRequest extends FormRequest
            
             'customer_id' => ['required','exists:customers,id'],
 
+            
+            'branch_id' => [
+                'required',
+                'exists:branches,id',
+            ],
+            
             'payment_method' => [
                 'required',
                 'in:cash,card,mobile_banking'

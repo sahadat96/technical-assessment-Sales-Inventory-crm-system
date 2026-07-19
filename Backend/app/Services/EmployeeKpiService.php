@@ -8,12 +8,6 @@ use App\Models\Sale;
 
 class EmployeeKpiService
 {
-
-    public function __construct(
-        private readonly EmployeeKpiService $employeeKpiService
-    ){
-    }
-
     public function reward(Sale $sale): void
     {
         $assignment = CustomerAssignment::where(

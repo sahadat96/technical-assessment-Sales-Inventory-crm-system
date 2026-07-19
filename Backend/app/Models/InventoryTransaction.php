@@ -16,6 +16,7 @@ class InventoryTransaction extends Model
         'previous_stock',
         'new_stock',
         'user_id',
+        'branch_id'
     ];
 
     protected $casts = [
